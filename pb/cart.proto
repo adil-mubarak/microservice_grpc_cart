@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package cart;
+
+option go_package = "pb/cart";
+
+service CartSeervice{
+    rpc AddToCart(AddToCartRequest)returns(AddToCartResponse);
+    rpc RemoveFromCart(RemoveFromCartRequest)returns(RemoveFromCartResponse);
+    rpc UpdateCartQuantity(UpdateCartQuantityRequest)returns(UpdateCartQuantiyResponse);
+    rpc ViewCart(ViewCartRequest)returns(ViewCartResponse);
+}
+
+message Cart{
+    uint32 id = 1;
+    int64 userID = 2;
+    int64 productID = 3;
+    int64 quantity = 4;
+}
+
+message AddToCartRequest{
+    int64 userID = 1;
+    int64 productID = 2;
+    int64 quantity = 3;
+}
+
+message AddToCartResponse{
+    uint32 id = 1;
+    string status = 2;
+}
+
+message RemoveFromCartRequest{
+    uint32 id = 1;
+}
+
+message RemoveFromCartResponse{
+    uint32 id = 1;
+    string status = 2;
+}
+
+message UpdateCartQuantityRequest{
+    uint32 id = 1;
+    int64 quantity = 2;
+}
+
+message UpdateCartQuantiyResponse{
+    uint32 id = 1;
+    string status = 2;
+}
+
+message ViewCartRequest{
+    int64 userID = 1;
+}
+
+message ViewCartResponse{
+    repeated Cart carts = 1;
+}
